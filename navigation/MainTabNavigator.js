@@ -43,34 +43,33 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'Codigos',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-barcode'} />
   ),
 };
 
 LinksStack.path = '';
 
-const SettingsStack = createStackNavigator(
+/* const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
   config
-);
+); */
 
-SettingsStack.navigationOptions = {
+/* SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
-};
+}; */
 
-SettingsStack.path = '';
+/* SettingsStack.path = ''; */
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  SettingsStack,
 });
 
 tabNavigator.path = '';

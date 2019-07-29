@@ -1,27 +1,55 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import React, { Component } from 'react'
+import QRCode from 'react-native-qrcode';
+ 
+const { width } = Dimensions.get('window')
+const modalW = Dimensions.get('window').width;
+const modalH = Dimensions.get('window').height;
 
-export default function LinksScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
-  );
+import {
+    AppRegistry,
+    StyleSheet,
+    View,
+    TextInput,
+    Text,
+    Dimensions
+} from 'react-native';
+ 
+class HelloWorld extends Component {
+  state = {
+    text: '20',
+  };
+ 
+  render() {
+    return (
+      <View style={styles.container}>
+        <QRCode
+          value={this.state.text}
+          size={200}
+          bgColor='purple'
+          fgColor='white'/>
+          <Text>
+          {this.state.text}{'\n'}{'\n'}
+        </Text>
+      </View>
+    );
+  };
 }
-
-LinksScreen.navigationOptions = {
-  title: 'Links',
-};
-
+ 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+ 
+    input: {
+      width: width - 20,
+      backgroundColor: '#DDE2E7',
+      marginTop: 5,
+    }
 });
+ 
+AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
+ 
+module.exports = HelloWorld;
