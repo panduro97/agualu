@@ -1,77 +1,94 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import React from 'react'
+import {NavigationActions, createStackNavigator, createDrawerNavigator} from 'react-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
 
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
-);
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+const navigationOptions = {
+	navigationOptions: {
+		headerStyle: {
+			backgroundColor: '#ffffff',
+		},
+		headerTitleStyle: {
+			textAlign: 'center',
+			alignSelf: 'center',
+			fontSize: 20,
+			color: '#000000',
+			fontWeight: 'bold'
+		}
+	}
+}
 
-HomeStack.path = '';
+const leftIcon = (navigation, icon) => <Icon
+	name={icon}
+	style={{paddingHorizontal: 20, paddingVertical:18}}
+	size={20}
+	color="#000000"
+	onPress={() => navigation.openDrawer()}
+/>;
 
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
+const goBack = (navigation, icon) => <Icon
+    name={icon}
+    style={{paddingHorizontal: 20, paddingVertical:18}}
+	size={20}
+	color="#000000"
+	onPress={() => navigation.goBack(Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT))}
+/>
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Codigos',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-barcode'} />
-  ),
-};
+/* const logoutScreenStack = createStackNavigator({
+    LogoutScreen: {
+        screen: Logout,
+        navigationOptions: ({navigation}) => ({
+            title: 'Cerrar sesión'
+        })
+    }
+}) */
 
-LinksStack.path = '';
+const body = createStackNavigator({
+    QRview: {
+        screen: LinksScreen,
+        navigationOptions: ({navigation}) => ({
+            title: 'LinksScreen',
+            headerLeft: leftIcon(navigation, 'bars'),
+        })
+    }
+},
+navigationOptions
+)
 
-/* const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-); */
 
-/* SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-}; */
 
-/* SettingsStack.path = ''; */
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-});
-
-tabNavigator.path = '';
-
-export default tabNavigator;
+export default createDrawerNavigator(
+    {
+          QrScreen: {
+            screen: body,
+            navigationOptions: ({navigation}) => ({
+                drawerLabel: 'Qr Code',
+                drawerIcon: ({tintColor}) => (<Icon name="clone" size={20} style={{color: tintColor}} />),
+            })
+        },
+     /*    LogoutScreen: {
+            screen: logoutScreenStack,
+            navigationOptions: ({navigation}) => ({
+                drawerLabel: 'Cerrar sesión',
+                drawerIcon: ({tintColor}) => (<Icon name="sign-out" size={20} style={{color: tintColor}} />),
+            })
+        } */
+    },
+	{
+		drawerBackgroundColor : '#6ea9ff',
+		contentOptions: {
+			activeTintColor: '#f980ba',
+			activeBackgroundColor : '#00cfff',
+			inactiveTintColor : '#ffffff',
+			itemsContainerStyle: {
+				marginVertical: 0,
+			}
+		}
+	}
+)
