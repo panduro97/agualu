@@ -2,9 +2,11 @@ import React from 'react'
 import {NavigationActions, createStackNavigator, createDrawerNavigator} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import Venta from '../screens/Venta';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import Recarga from '../screens/Recarga';
+import Cupon from '../screens/Cupon';
+
 
 
 
@@ -52,7 +54,28 @@ const body = createStackNavigator({
     QRview: {
         screen: LinksScreen,
         navigationOptions: ({navigation}) => ({
-            title: 'LinksScreen',
+            title: 'Pruebas',
+            headerLeft: leftIcon(navigation, 'bars'),
+        })
+    },
+    Venta: {
+        screen: Venta,
+        navigationOptions: ({navigation}) => ({
+            title: 'Venta',
+            headerLeft: leftIcon(navigation, 'bars'),
+        })
+    },
+    Cupon: {
+        screen: Cupon,
+        navigationOptions: ({navigation}) => ({
+            title: 'Cupon',
+            headerLeft: leftIcon(navigation, 'bars'),
+        })
+    },
+    Recarga: {
+        screen: Recarga,
+        navigationOptions: ({navigation}) => ({
+            title: 'Recarga',
             headerLeft: leftIcon(navigation, 'bars'),
         })
     }

@@ -38,25 +38,19 @@ export default class HomeScreen extends Component {
         headers: { 'Content-Type': 'application/json' }
       })
         .then(async (response) => {
-         /*  console.log(response) */
           this.setState({ spinner: false })
           if (response.data.status_code === 200) {
-            let token = response.data.user_token 
+            let token = response.data.user_token
+            let user_id = this.state.id
+
             try {
               await AsyncStorage.setItem('TokenLogin', token);
+              await AsyncStorage.setItem('UserID', user_id);
+
             } catch (error) {
               console.log(error)
             }
             this.props.navigation.navigate('Logged')
-
-/*             this._storeData(JSON.parse(response._bodyText).token,null,null,null)
-            this._setStore()
-            Toast.show('Bienvenido a Motiprints', { duration: Toast.durations.LONG, hideOnPress: true })
-            Alert.alert(
-              '', 'Tus álbumes se conservan un máximo de 60 días, realiza tu pedido cuanto antes para que tus recuerdos no desaparezcan',
-              [{ text: 'Aceptar', style: 'cancel' }]
-            )
-            this.props.navigation.navigate('Logged') */
           }
         })
         .catch(error => {
