@@ -58,13 +58,11 @@ const body = createStackNavigator({
             headerLeft: leftIcon(navigation, 'bars'),
         })
     },
-    Venta: {
-        screen: Venta,
-        navigationOptions: ({navigation}) => ({
-            title: 'Venta',
-            headerLeft: leftIcon(navigation, 'bars'),
-        })
-    },
+},
+navigationOptions
+)
+
+const prom = createStackNavigator({
     Cupon: {
         screen: Cupon,
         navigationOptions: ({navigation}) => ({
@@ -72,6 +70,23 @@ const body = createStackNavigator({
             headerLeft: leftIcon(navigation, 'bars'),
         })
     },
+},
+navigationOptions
+)
+
+const sales = createStackNavigator({
+    Venta: {
+        screen: Venta,
+        navigationOptions: ({navigation}) => ({
+            title: 'Venta',
+            headerLeft: leftIcon(navigation, 'bars'),
+        })
+    },
+},
+navigationOptions
+)
+
+const reload = createStackNavigator({
     Recarga: {
         screen: Recarga,
         navigationOptions: ({navigation}) => ({
@@ -83,9 +98,6 @@ const body = createStackNavigator({
 navigationOptions
 )
 
-
-
-
 export default createDrawerNavigator(
     {
           QrScreen: {
@@ -95,6 +107,28 @@ export default createDrawerNavigator(
                 drawerIcon: ({tintColor}) => (<Icon name="clone" size={20} style={{color: tintColor}} />),
             })
         },
+        reloadScreen: {
+            screen: reload,
+            navigationOptions: ({navigation}) => ({
+                drawerLabel: 'Recargas',
+                drawerIcon: ({tintColor}) => (<Icon name="refresh" size={20} style={{color: tintColor}} />),
+            })
+        },
+        saleScreen: {
+            screen: sales,
+            navigationOptions: ({navigation}) => ({
+                drawerLabel: 'Ventas',
+                drawerIcon: ({tintColor}) => (<Icon name="barcode" size={20} style={{color: tintColor}} />),
+            })
+        },
+        promScreen: {
+            screen: prom,
+            navigationOptions: ({navigation}) => ({
+                drawerLabel: 'Cupon',
+                drawerIcon: ({tintColor}) => (<Icon name="qrcode" size={20} style={{color: tintColor}} />),
+            })
+        },
+        
      /*    LogoutScreen: {
             screen: logoutScreenStack,
             navigationOptions: ({navigation}) => ({
